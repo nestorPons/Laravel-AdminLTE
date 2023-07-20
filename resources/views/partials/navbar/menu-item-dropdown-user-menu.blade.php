@@ -22,9 +22,11 @@
                  class="user-image img-circle elevation-2"
                  alt="{{ Auth::user()->name }}">
         @endif
-        <span @if(config('adminlte.usermenu_image')) class="d-none d-md-inline" @endif>
-            {{ Auth::user()->name }}
-        </span>
+        @if(config('adminlte.usermenu_name') or !config('adminlte.usermenu_image'))
+            <span class="d-md-inline">
+                {{ Auth::user()->name }}
+            </span>
+        @endif
     </a>
 
     {{-- User menu dropdown --}}
