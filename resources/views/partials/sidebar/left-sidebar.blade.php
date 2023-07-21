@@ -22,6 +22,39 @@
                 @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item')
             </ul>
         </nav>
+        
+        {{-- Reactive nav-links --}}
+        @if(config('adminlte.sidebar_reactive_nav_links'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const container = this.getElementsByClassName("sidebar")[0];
+                const navLinks = container.getElementsByClassName("nav-link");
+
+                for (const link of navLinks) {
+                    link.addEventListener("click", function(event) {
+                        event.preventDefault();
+
+                        const url = link.getAttribute("href");
+                        if (url) {
+                            const contentSection = document.querySelector(".content");
+                            axios
+                                .get(url)
+                                .then((response) => {
+                                    contentSection.innerHTML = response.data;
+                                    if (Livewire) Livewire.restart();
+                                })
+                                .catch((error) => {
+                                    contentSection.innerHTML = error;
+
+                                    console.error("Error al cargar el contenido:", error);
+                                });
+                        }
+                    });
+                }
+            });
+
+        </script>
+        @endif
     </div>
 
 </aside>
