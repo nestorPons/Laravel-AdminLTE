@@ -219,7 +219,7 @@ return [
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
     'sidebar_nav_animation_speed' => 300,
-
+    'sidebar_reactive_nav_links' => false,
     /*
     |--------------------------------------------------------------------------
     | Control Sidebar (Right Sidebar)
